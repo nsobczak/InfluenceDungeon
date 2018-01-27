@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 2391464}
   - component: {fileID: 11412478}
   - component: {fileID: 54563879417048522}
-  - component: {fileID: 65677430935897856}
-  - component: {fileID: 114738618461884926}
   m_Layer: 0
   m_Name: FloorPlate
   m_TagString: Untagged
@@ -48,7 +46,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: fcaa6d79dc645dd499596b12139209c0, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,26 +127,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65677430935897856
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148772}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5, y: 0, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114738618461884926
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 148772}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c613f11fe8879cc4db04a4c31ef6fdce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

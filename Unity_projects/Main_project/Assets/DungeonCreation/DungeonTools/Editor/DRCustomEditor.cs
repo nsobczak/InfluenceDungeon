@@ -33,7 +33,7 @@ public class DRCustomEditor : Editor
         DRId drIdObject = (DRId)target;
         if (idProperty.intValue <= -1)
         {
-            drIdObject.gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(227f / 255f, 227f / 255f, 227f / 255f);
+            //drIdObject.gameObject.GetComponent<Renderer>().sharedMaterial.color = new Color(227f / 255f, 227f / 255f, 227f / 255f);
         }
         else
         {
