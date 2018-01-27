@@ -1,0 +1,27 @@
+# XSI Wavefront OBJ Export v3.0
+# File Created: Mon Sep 21 00:08:18 2015
+# XSI Version: 13.0.114.0
+mtllib floorPlate_center.mtl
+
+o grid
+# Hierarchy (from self to top father)
+g grid
+
+#begin 4 vertices
+v 5.000000 0.000000 -5.000000
+v -5.000000 0.000000 -5.000000
+v 5.000000 0.000000 5.000000
+v -5.000000 0.000000 5.000000
+#end 4 vertices
+
+#begin 4 normals
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+#end 4 vertex normals
+
+#begin 1 faces
+usemtl scene_material1
+f 1//1 2//2 4//3 3//4 
+#end 1 faces
