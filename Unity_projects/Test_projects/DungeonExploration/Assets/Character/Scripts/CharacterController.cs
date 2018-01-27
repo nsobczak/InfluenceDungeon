@@ -8,7 +8,8 @@ public class CharacterController : MonoBehaviour
 
     [SerializeField] private string FLOOR_TAG = "Floor";
     [SerializeField] private float PLAYER_Y_OFFSET = 0.8f;
-    [SerializeField] private GameObject FLOOR_PREFAB;
+    [SerializeField] private GameObject floorPrefab;
+    private List<GameObject> coloredTiles;
 
     private float floorSize;
     [SerializeField] private float SECURITY_PERCENTAGE = 0.2f;
@@ -19,19 +20,18 @@ public class CharacterController : MonoBehaviour
     //____________________________________________________
 
     #region Functions
-    
+
     private void Start()
     {
-        Vector3 floorSizeVector = FLOOR_PREFAB.transform.GetComponent<MeshRenderer>().bounds.size;
+        Vector3 floorSizeVector = floorPrefab.transform.GetComponent<MeshRenderer>().bounds.size;
         floorSize = (floorSizeVector.x + floorSizeVector.z) / 2 +
                     SECURITY_PERCENTAGE * (floorSizeVector.x + floorSizeVector.z);
-        Debug.Log("size: " + floorSize);
+        coloredTiles = new List<GameObject>();
     }
 
 
     private bool IsMovementAllowed(Transform target)
     {
-        Debug.Log("distance: " + Vector3.Distance(transform.position, target.position));
         if (Vector3.Distance(transform.position, target.position) <= this.floorSize)
             return true;
         else
@@ -47,13 +47,23 @@ public class CharacterController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100))
         {
             Debug.DrawLine(ray.origin, hit.point);
-            if (Input.GetMouseButtonDown(0) && hit.transform.CompareTag(FLOOR_TAG) && IsMovementAllowed(hit.transform))
+            if (hit.transform.CompareTag(FLOOR_TAG) && IsMovementAllowed(hit.transform))
             {
-                Debug.Log("hit object is: " + hit.transform.name);
-                transform.position = new Vector3(hit.transform.position.x, PLAYER_Y_OFFSET, hit.transform.position.z);
+                hit.transform.GetComponent<MeshRenderer>().materials[0].color = Color.red;
+                coloredTiles.Add(hit.transform.gameObject);
+                
+                if (Input.GetMouseButtonDown(0))
+                {
+                    Debug.Log("hit object is: " + hit.transform.name);
+                    transform.position =
+                        new Vector3(hit.transform.position.x, PLAYER_Y_OFFSET, hit.transform.position.z);
+                    
+                    foreach (var tile in coloredTiles)
+                        tile.transform.GetComponent<MeshRenderer>().materials[0].color = Color.white;
+                }
             }
         }
     }
-    
+
     #endregion
 }
