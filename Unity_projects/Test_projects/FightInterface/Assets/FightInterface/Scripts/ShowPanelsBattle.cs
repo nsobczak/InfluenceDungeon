@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ShowPanels : MonoBehaviour
+public class ShowPanelsBattle : MonoBehaviour
 {
     #region Parameters
 
