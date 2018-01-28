@@ -7,20 +7,41 @@ public class CharacterController : MonoBehaviour
     #region Attributes
 
     [SerializeField] private string FLOOR_TAG = "Floor";
-    [SerializeField] private string TRAP_SPIKES_TAG = "TrapSpikes";
-    [SerializeField] private string TRAP_HOLES_TAG = "TrapHoles";
-    [SerializeField] private string TRAP_OTHER_TAG = "TrapOther";
     [SerializeField] private float PLAYER_Y_OFFSET = 0.8f;
     [SerializeField] private GameObject floorPrefab;
-    private List<GameObject> coloredTiles;
+    [SerializeField] private float SECURITY_FLOOR_DISTANCE_PERCENTAGE = 0.2f;
+    [SerializeField] private int TRAP_SPIKES_DAMAGE_AMOUNT = 40;
+    [SerializeField] private int TRAP_OTHER_DAMAGE_AMOUNT = 20;
 
+    private List<GameObject> coloredTiles;
     private float floorSize;
-    [SerializeField] private float SECURITY_PERCENTAGE = 0.2f;
+    private Player player;
 
     #endregion
 
 
     //____________________________________________________
+
+    #region singleton
+
+    private static CharacterController characterControllerInstance = null;
+
+    private CharacterController()
+    {
+    }
+
+    public static CharacterController GetGameControllerInstance
+    {
+        get
+        {
+            if (characterControllerInstance == null)
+                characterControllerInstance = new CharacterController();
+            return characterControllerInstance;
+        }
+    }
+
+    #endregion
+
 
     #region Functions
 
@@ -28,8 +49,9 @@ public class CharacterController : MonoBehaviour
     {
         Vector3 floorSizeVector = floorPrefab.transform.GetComponent<MeshRenderer>().bounds.size;
         floorSize = (floorSizeVector.x + floorSizeVector.z) / 2 +
-                    SECURITY_PERCENTAGE * (floorSizeVector.x + floorSizeVector.z);
+                    SECURITY_FLOOR_DISTANCE_PERCENTAGE * (floorSizeVector.x + floorSizeVector.z);
         coloredTiles = new List<GameObject>();
+        player = new Player();
     }
 
 
@@ -49,20 +71,61 @@ public class CharacterController : MonoBehaviour
         {
             //TODO: handle trap
             Debug.Log("It's a trap !");
-            Transform childTile = tile.transform.GetChild(0);
-            if (childTile.CompareTag(TRAP_SPIKES_TAG))
+            EventTile childTile = tile.transform.GetChild(0).GetComponent<EventTile>();
+            if (null != childTile)
             {
-                Debug.Log("Trap is: " + TRAP_SPIKES_TAG);
+                TileNatureEnum childTileNature = childTile.TileNatureEnum;
+
+                if (childTileNature == TileNatureEnum.Spikes)
+                {
+                    Debug.Log("Trap is: " + TileNatureEnum.Spikes);
+                    player.Hp -= TRAP_SPIKES_DAMAGE_AMOUNT;
+                }
+                else if (childTileNature == TileNatureEnum.Holes)
+                {
+                    Debug.Log("Trap is: " + TileNatureEnum.Holes);
+                    Reset();
+                }
+                else if (childTileNature == TileNatureEnum.OtherTrap)
+                {
+                    Debug.Log("Trap is: " + TileNatureEnum.OtherTrap);
+                    player.Hp -= TRAP_OTHER_DAMAGE_AMOUNT;
+                }
+                else if (childTileNature == TileNatureEnum.Monster)
+                {
+                    Debug.Log("Trap is: " + TileNatureEnum.Monster);
+                    //TODO: start battle here
+                }
+                else if (childTileNature == TileNatureEnum.StartPoint)
+                {
+                    Debug.Log("Trap is: " + TileNatureEnum.StartPoint);
+                }
+                else if (childTileNature == TileNatureEnum.ExitPoint)
+                {
+                    Debug.Log("Trap is: " + TileNatureEnum.ExitPoint);
+                    GameOver();
+                }
+                else
+                    Debug.Log("Trap is unknown !");
             }
-            else if (childTile.CompareTag(TRAP_HOLES_TAG))
-            {
-                Debug.Log("Trap is: " + TRAP_HOLES_TAG);
-            }
-            else //banana peel
-            {
-                Debug.Log("Trap is: " + TRAP_OTHER_TAG);
-            }
+
+            if (player.Hp <= 0)
+                Reset();
         }
+    }
+
+
+    private void Reset()
+    {
+        this.player = new Player();
+        //TODO: le téléporter à l'entrée
+    }
+
+
+    private void GameOver()
+    {
+        Debug.Log("game over");
+        //TODO:
     }
 
 
