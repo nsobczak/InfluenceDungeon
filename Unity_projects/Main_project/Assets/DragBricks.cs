@@ -8,10 +8,6 @@ public class DragBricks : MonoBehaviour {
 	private Vector3 screenPoint;
 	private Vector3 offset;
 
-	private string pos;
-	private GameObject collisionObject;
-	private bool canClip = false;
-
 	void OnMouseDown()
 	{
 		screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -23,49 +19,22 @@ public class DragBricks : MonoBehaviour {
 		Vector3 cursorScreenPoint = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 		Vector3 cursorPosition = Camera.main.ScreenToWorldPoint (cursorScreenPoint) + offset;
 		transform.position = cursorPosition;
-		canClip = true;
 	}
 
 	void OnMouseUp(){
-		if (canClip&&collisionObject!=null) {
-			Vector3 relative=collisionObject.transform.InverseTransformPoint(transform.position);
-			if(relative.x>0){
-				pos="right";
-			}else{
-				pos="left";
-			}
-			if(relative.x/relative.y<1){
-				if(relative.y>0){
-					pos="top";
-				}else{
-					pos="bottom";
-				}
-			}
-
-			Debug.Log (pos);
-
-			if (pos == "top") {
-				transform.position = new Vector3 (collisionObject.transform.position.x, collisionObject.transform.position.y, collisionObject.transform.position.z + blocSize);
-			} else if (pos == "right") {
-				transform.position = new Vector3 (collisionObject.transform.position.x + blocSize, collisionObject.transform.position.y, collisionObject.transform.position.z);
-			} else if (pos == "left") {
-				transform.position = new Vector3 (collisionObject.transform.position.x - blocSize, collisionObject.transform.position.y, collisionObject.transform.position.z);
-			} else if (pos == "bottom") {
-				transform.position = new Vector3 (collisionObject.transform.position.x, collisionObject.transform.position.y, collisionObject.transform.position.z - blocSize);
-			}
+		Vector3 fwd = transform.TransformDirection(new Vector3(1,0,0));
+		Vector3 bwd = transform.TransformDirection(new Vector3(-1,0,0));
+		Vector3 uwd = transform.TransformDirection(new Vector3(0,1,0));
+		Vector3 dwd = transform.TransformDirection(new Vector3(0,-1,0));
+		RaycastHit hit;
+		if (Physics.Raycast (transform.position, fwd, out hit, 10)) {
+			transform.position = new Vector3 (hit.transform.position.x - blocSize, hit.transform.position.y, hit.transform.position.z);
+		} else if (Physics.Raycast (transform.position, bwd, out hit, 10)) {
+			transform.position = new Vector3 (hit.transform.position.x + blocSize, hit.transform.position.y, hit.transform.position.z);
+		}else if (Physics.Raycast (transform.position, uwd, out hit, 10)) {
+			transform.position = new Vector3 (hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - blocSize);
+		}else if (Physics.Raycast (transform.position, dwd, out hit, 10)) {
+			transform.position = new Vector3 (hit.transform.position.x, hit.transform.position.y, hit.transform.position.z + blocSize);
 		}
-		canClip = false;
-
-	}
-
-	public void Clip(GameObject otherObject){
-		if (canClip) {
-			Debug.Log (otherObject);
-			collisionObject = otherObject;
-		}
-	}
-
-	void OnTriggerExit(Collider other){
-		collisionObject = null;
 	}
 }
