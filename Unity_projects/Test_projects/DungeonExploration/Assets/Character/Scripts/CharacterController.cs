@@ -12,7 +12,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private string FLOOR_START_TAG = "FloorStart";
     [SerializeField] private string FLOOR_TRAP_TAG = "FloorTrap";
     [SerializeField] private float PLAYER_Y_OFFSET = 0.8f;
-    [SerializeField] private float TRAPP_Y_OFFSET = -0.2f;
+    [SerializeField] private float TRAP_Y_OFFSET = -0.2f;
     [SerializeField] private GameObject floorPrefab;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private float SECURITY_FLOOR_DISTANCE_PERCENTAGE = 0.2f;
@@ -101,17 +101,19 @@ public class CharacterController : MonoBehaviour
         {
             //TODO: handle trap
             Debug.Log("It's a trap !");
-            EventTile childTile;
+            GameObject trapTile;
             if (tile.transform.childCount > 0)
-                childTile = tile.transform.GetChild(0).GetComponent<EventTile>();
+                trapTile = tile.transform.GetChild(0).gameObject;
             else
-                childTile = tile.transform.GetComponent<EventTile>();
+                trapTile = tile.gameObject;
 
-            childTile.transform.position = new Vector3(childTile.transform.position.x, TRAPP_Y_OFFSET,
-                childTile.transform.position.z);
-            if (null != childTile)
+            tile.GetComponent<MeshRenderer>().enabled = false;
+//            trapTile.transform.position = new Vector3(trapTile.transform.position.x, TRAP_Y_OFFSET,
+//                trapTile.transform.position.z);
+
+            if (null != trapTile)
             {
-                TileNatureEnum childTileNature = childTile.TileNatureEnum;
+                TileNatureEnum childTileNature = trapTile.GetComponent<EventTile>().TileNatureEnum;
 
                 if (childTileNature == TileNatureEnum.Spikes)
                 {
@@ -121,6 +123,7 @@ public class CharacterController : MonoBehaviour
                 else if (childTileNature == TileNatureEnum.Holes)
                 {
                     Debug.Log("Trap is: " + TileNatureEnum.Holes);
+                    GameObject.Destroy(player);
                     Reset();
                 }
                 else if (childTileNature == TileNatureEnum.OtherTrap)
@@ -147,7 +150,10 @@ public class CharacterController : MonoBehaviour
             }
 
             if (player.Hp <= 0)
+            {
+                GameObject.Destroy(player);
                 Reset();
+            }
         }
     }
 
