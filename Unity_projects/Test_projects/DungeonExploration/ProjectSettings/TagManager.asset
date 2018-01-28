@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - FloorStart
+  - FloorTrap
   layers:
   - Default
   - TransparentFX
