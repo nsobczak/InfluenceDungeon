@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/DungeonCreation/DungeonExploration.unity
     guid: f1aa46fa36b53164ca97a639632f14c7
+  - enabled: 1
+    path: Assets/BattleSystem/BattleScene.unity
+    guid: 7dc90051f245d1346aa2174c42eb3b19
