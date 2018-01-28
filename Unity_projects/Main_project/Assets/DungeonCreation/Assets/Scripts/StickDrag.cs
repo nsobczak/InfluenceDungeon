@@ -14,7 +14,7 @@ public class StickDrag : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("Position" + transform.position);
+		//Debug.Log ("Position" + transform.position);
 	}
 
 	void OnTriggerEnter(Collider other) {
