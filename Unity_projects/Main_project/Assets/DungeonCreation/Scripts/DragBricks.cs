@@ -1,4 +1,4 @@
-﻿                                                            using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,15 +28,37 @@ public class DragBricks : MonoBehaviour {
 		Vector3 bwd = transform.TransformDirection(new Vector3(-1,0,0));
 		Vector3 uwd = transform.TransformDirection(new Vector3(0,1,0));
 		Vector3 dwd = transform.TransformDirection(new Vector3(0,-1,0));
+		float minDistR=joinDistanceRight,minDistL=joinDistanceLeft,minDistU=joinDistanceUp,minDistD=joinDistanceDown;
+		Transform transR, transL, transU, transD;
+		transR=transL=transU=transD=transform;
 		RaycastHit hit;
 		if (Physics.Raycast (transform.position, fwd, out hit, joinDistanceRight)&&joinRight) {
-			transform.position = new Vector3 (hit.transform.position.x - blocSize, hit.transform.position.y, hit.transform.position.z);
-		} else if (Physics.Raycast (transform.position, bwd, out hit, joinDistanceLeft)&&joinLeft) {
-			transform.position = new Vector3 (hit.transform.position.x + blocSize, hit.transform.position.y, hit.transform.position.z);
-		}else if (Physics.Raycast (transform.position, uwd, out hit, joinDistanceUp)&&joinUp) {
-			transform.position = new Vector3 (hit.transform.position.x, hit.transform.position.y, hit.transform.position.z - blocSize);
-		}else if (Physics.Raycast (transform.position, dwd, out hit, joinDistanceDown)&&joinDown) {
-			transform.position = new Vector3 (hit.transform.position.x, hit.transform.position.y, hit.transform.position.z + blocSize);
+			minDistR=hit.distance;
+			transR=hit.transform;
+		}
+		if (Physics.Raycast (transform.position, bwd, out hit, joinDistanceLeft)&&joinLeft) {
+			minDistL=hit.distance;
+			transL=hit.transform;
+		}
+		if (Physics.Raycast (transform.position, uwd, out hit, joinDistanceUp)&&joinUp) {
+			minDistU=hit.distance;
+			transU=hit.transform;
+		}
+		if (Physics.Raycast (transform.position, dwd, out hit, joinDistanceDown)&&joinDown) {
+			minDistD=hit.distance;
+			transD=hit.transform;
+		}
+		if (minDistR < minDistL&&minDistR<minDistU&&minDistR<minDistD) {
+			transform.position = new Vector3 (transR.position.x - blocSize, transR.position.y, transR.position.z);
+		}
+		if (minDistL < minDistR && minDistL < minDistU && minDistL < minDistD) {
+			transform.position = new Vector3 (transL.position.x + blocSize, transL.position.y, transL.position.z);
+		}
+		if (minDistU < minDistR && minDistU < minDistL && minDistU < minDistD) {
+			transform.position = new Vector3 (transU.position.x, transU.position.y, transU.position.z - blocSize);
+		}
+		if (minDistD < minDistR && minDistD < minDistL && minDistD < minDistU) {
+			transform.position = new Vector3 (transD.position.x, transD.position.y, transD.position.z + blocSize);
 		}
 	}
 }
