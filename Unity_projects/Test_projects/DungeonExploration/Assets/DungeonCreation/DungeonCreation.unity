@@ -3318,6 +3318,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73b951167a4f87143a773bd234a88a60, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &274930263 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 148772, guid: 73b951167a4f87143a773bd234a88a60, type: 2}
+  m_PrefabInternal: {fileID: 274930262}
+--- !u!114 &274930264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 274930263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f10892e6dc2b432988cbfbde631290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileNatureIndex: 1
 --- !u!21 &285588026
 Material:
   serializedVersion: 6
@@ -21703,6 +21719,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73b951167a4f87143a773bd234a88a60, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1620960966 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 148772, guid: 73b951167a4f87143a773bd234a88a60, type: 2}
+  m_PrefabInternal: {fileID: 1620960965}
+--- !u!114 &1620960967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1620960966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f10892e6dc2b432988cbfbde631290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileNatureIndex: 3
 --- !u!1001 &1628957761
 Prefab:
   m_ObjectHideFlags: 0
@@ -23773,6 +23805,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73b951167a4f87143a773bd234a88a60, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1758537996 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 148772, guid: 73b951167a4f87143a773bd234a88a60, type: 2}
+  m_PrefabInternal: {fileID: 1758537995}
+--- !u!114 &1758537997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1758537996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f10892e6dc2b432988cbfbde631290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileNatureIndex: 2
 --- !u!21 &1759105849
 Material:
   serializedVersion: 6
