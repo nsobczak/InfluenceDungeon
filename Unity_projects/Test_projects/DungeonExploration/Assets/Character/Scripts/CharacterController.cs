@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour
 {
     #region Attributes
 
+    [SerializeField] private int MAIN_MENU_INDEX = 0;
     [SerializeField] private string FLOOR_TAG = "Floor";
+    [SerializeField] private string FLOOR_START_TAG = "FloorStart";
     [SerializeField] private float PLAYER_Y_OFFSET = 0.8f;
     [SerializeField] private GameObject floorPrefab;
+    [SerializeField] private GameObject playerPrefab;
     [SerializeField] private float SECURITY_FLOOR_DISTANCE_PERCENTAGE = 0.2f;
     [SerializeField] private int TRAP_SPIKES_DAMAGE_AMOUNT = 40;
     [SerializeField] private int TRAP_OTHER_DAMAGE_AMOUNT = 20;
 
+    private GameObject startPointTile;
     private List<GameObject> coloredTiles;
     private float floorSize;
     private Player player;
@@ -45,22 +50,45 @@ public class CharacterController : MonoBehaviour
 
     #region Functions
 
-    private void Start()
-    {
-        Vector3 floorSizeVector = floorPrefab.transform.GetComponent<MeshRenderer>().bounds.size;
-        floorSize = (floorSizeVector.x + floorSizeVector.z) / 2 +
-                    SECURITY_FLOOR_DISTANCE_PERCENTAGE * (floorSizeVector.x + floorSizeVector.z);
-        coloredTiles = new List<GameObject>();
-        player = new Player();
-    }
-
-
     private bool IsMovementAllowed(Transform target)
     {
         if (Vector3.Distance(transform.position, target.position) <= this.floorSize)
             return true;
         else
             return false;
+    }
+
+
+    private void Reset()
+    {
+        this.transform.position = new Vector3(startPointTile.transform.position.x, startPointTile.transform.position.y,
+            startPointTile.transform.position.z); //on start point
+        player = GameObject.Instantiate(playerPrefab, transform).GetComponent<Player>();
+        player.transform.position = this.transform.position + new Vector3(0, PLAYER_Y_OFFSET, 0); //make visible
+    }
+
+
+    private void GameOver()
+    {
+        Debug.Log("game over");
+        GameObject.Destroy(player);
+        SceneManager.LoadScene(0);
+    }
+
+    #endregion
+
+
+    #region MainFunctions
+
+    private void Start()
+    {
+        Vector3 floorSizeVector = floorPrefab.transform.GetComponent<MeshRenderer>().bounds.size;
+        floorSize = (floorSizeVector.x + floorSizeVector.z) / 2 +
+                    SECURITY_FLOOR_DISTANCE_PERCENTAGE * (floorSizeVector.x + floorSizeVector.z);
+        coloredTiles = new List<GameObject>();
+
+        startPointTile = GameObject.FindWithTag(FLOOR_START_TAG);
+        Reset();
     }
 
 
@@ -113,21 +141,6 @@ public class CharacterController : MonoBehaviour
                 Reset();
         }
     }
-
-
-    private void Reset()
-    {
-        this.player = new Player();
-        //TODO: le téléporter à l'entrée
-    }
-
-
-    private void GameOver()
-    {
-        Debug.Log("game over");
-        //TODO:
-    }
-
 
     private void Update()
     {
