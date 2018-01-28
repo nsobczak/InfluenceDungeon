@@ -53,6 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FLOOR_TAG: Floor
+  TRAP_SPIKES_TAG: TrapSpikes
+  TRAP_HOLES_TAG: TrapHoles
+  TRAP_OTHER_TAG: TrapOther
   PLAYER_Y_OFFSET: 0.8
   floorPrefab: {fileID: 148772, guid: 73b951167a4f87143a773bd234a88a60, type: 2}
   SECURITY_PERCENTAGE: 0.2
