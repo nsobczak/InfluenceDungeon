@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour {
 
@@ -68,11 +69,14 @@ public class BattleSystem : MonoBehaviour {
         if (victory)
         {
             descriptionText.text = "Victory";
+            Destroy(enemy.gameObject);
         }
         else
         {
             descriptionText.text = "Game Over";
+            Destroy(player.gameObject);
         }
+        SceneManager.LoadScene("DungeonCreation");
     }
 
     IEnumerator PlayerTurn()

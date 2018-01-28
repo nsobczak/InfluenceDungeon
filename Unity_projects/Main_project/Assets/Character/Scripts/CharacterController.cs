@@ -134,7 +134,7 @@ public class CharacterController : MonoBehaviour
                 else if (childTileNature == TileNatureEnum.Monster)
                 {
                     Debug.Log("Trap is: " + TileNatureEnum.Monster);
-                    //TODO: start battle here
+                    SceneManager.LoadScene("BattleScene");
                 }
                 else if (childTileNature == TileNatureEnum.StartPoint)
                 {
