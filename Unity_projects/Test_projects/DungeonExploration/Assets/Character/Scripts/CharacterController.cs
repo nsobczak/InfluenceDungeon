@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private string FLOOR_TAG = "Floor";
     [SerializeField] private string FLOOR_START_TAG = "FloorStart";
     [SerializeField] private float PLAYER_Y_OFFSET = 0.8f;
+    [SerializeField] private float TRAPP_Y_OFFSET = 0.2f;
     [SerializeField] private GameObject floorPrefab;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private float SECURITY_FLOOR_DISTANCE_PERCENTAGE = 0.2f;
@@ -100,6 +101,7 @@ public class CharacterController : MonoBehaviour
             //TODO: handle trap
             Debug.Log("It's a trap !");
             EventTile childTile = tile.transform.GetChild(0).GetComponent<EventTile>();
+            childTile.transform.position += new Vector3(0, TRAPP_Y_OFFSET, 0);
             if (null != childTile)
             {
                 TileNatureEnum childTileNature = childTile.TileNatureEnum;
