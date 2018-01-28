@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class Concentration : Action{
 
-    public Concentration()
+    public override void Init()
     {
         name = "Concentration";
         desc = "Focus to regain MP";
         battleDesc = caster.battlerName + " is focusing ";
-        priority = 1;
-        mpCost = 0;
-        hpCost = 0;
     }
 
     public override void CastAction()
     {
         caster.SpendMp(mpCost);
-        caster.RegenMp(caster.mag/4);
+        caster.RegenMp(10);
     }
 }

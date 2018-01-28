@@ -8,12 +8,10 @@ public class BattlerController : MonoBehaviour {
     public int hpMax, mpMax, hp, mp, atk, mag, def, res, init;
     public float fireRes, iceRes, thunderRes;
     public BattleSystem battleSystem;
-
-    [HideInInspector]
     public StatEnhancement buffs;
-    public int turn;
-    public bool activeTurn;
-    public List<Action> actions;
+
+    [HideInInspector] public int turn;
+    [HideInInspector] public bool activeTurn;
 
     // Use this for initialization
     void Start () {
@@ -22,18 +20,41 @@ public class BattlerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (hp > hpMax + buffs.hpMax)
+        {
+            hp = hpMax + buffs.hpMax;
+        }
+        else if (hp < 0)
+        {
+            hp = 0;
+        }
+        if (mp > mpMax + buffs.mpMax)
+        {
+            mp = mpMax + buffs.mpMax;
+        }
+        else if (mp < 0)
+        {
+            mp = 0;
+        }
+    }
 
     public void PerformAction(Action action)
     {
         turn++;
-        action.CastAction();
+        if (action != null)
+        {
+            action.CastAction();
+            battleSystem.descriptionText.text = action.battleDesc;
+        }
+        else
+        {
+            battleSystem.descriptionText.text = battlerName + " is waiting";
+        }
     }
 
     public void PhysicDamage(int damage)
     {
-        damage = Mathf.Max(0, damage - def);
+        damage = Mathf.Max(0, damage - (def+buffs.def));
         hp -= damage;
     }
 
@@ -42,17 +63,17 @@ public class BattlerController : MonoBehaviour {
         float elementalRes = 1;
         if ("Fire".Equals(element))
         {
-            elementalRes = fireRes;
+            elementalRes = fireRes + buffs.fireRes;
         }
         else if("Ice".Equals(element))
         {
-            elementalRes = iceRes;
+            elementalRes = iceRes + buffs.iceRes;
         }
         else if ("Thunder".Equals(element))
         {
-            elementalRes = thunderRes;
+            elementalRes = thunderRes + buffs.thunderRes;
         }
-        damage = Mathf.Max(0, Mathf.RoundToInt(elementalRes*damage) - res);
+        damage = Mathf.Max(0, Mathf.RoundToInt(elementalRes*damage) - (res+buffs.res));
         hp -= damage;
     }
 
@@ -68,11 +89,11 @@ public class BattlerController : MonoBehaviour {
 
     public void RegenHp(int amount)
     {
-        amount = Mathf.Min(hpMax, hp + amount);
+        hp = Mathf.Min(hpMax+buffs.hpMax, hp + amount);
     }
 
     public void RegenMp(int amount)
     {
-        amount = Mathf.Min(mpMax, mp + amount);
+        mp = Mathf.Min(mpMax+buffs.mpMax, mp + amount);
     }
 }

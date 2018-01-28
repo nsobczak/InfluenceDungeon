@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyBattlerController : BattlerController {
 
+    public List<Action> actions;
+
     private int priorityRange;
     private List<Action> priorityActions;
 
@@ -16,6 +18,7 @@ public class EnemyBattlerController : BattlerController {
             action.target = battleSystem.player;
             action.caster = battleSystem.enemy;
             priorityRange += action.priority;
+            action.Init();
             for(int i=0; i<action.priority; i++)
             {
                 priorityActions.Add(action);
@@ -30,9 +33,9 @@ public class EnemyBattlerController : BattlerController {
 
     }
 
-    public Action selectAction()
+    public Action SelectAction()
     {
-        return priorityActions[Random.Range(0, priorityRange - 1)];
+        return priorityActions[Mathf.RoundToInt(Random.Range(0, priorityRange - 1))];
     }
 
 }

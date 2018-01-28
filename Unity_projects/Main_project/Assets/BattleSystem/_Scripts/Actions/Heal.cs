@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class Heal : Action {
 
-    public Heal()
+    public override void Init()
     {
         name = "Heal";
         desc = "Heal yourself";
         battleDesc = caster.battlerName + " heals up ";
-        priority = 1;
-        mpCost = 10;
-        hpCost = 0;
     }
 
     public override void CastAction()

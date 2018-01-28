@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class StatEnhancement : MonoBehaviour {
 
-    private int hpMax, mpMax, atk, mag, def, res, init;
-    private float fireRes, iceRes, thunderRes;
-    public int turn;
     public BattlerController battler;
+
+    public int hpMax, mpMax, atk, mag, def, res, init;
+    public float fireRes, iceRes, thunderRes;
     
     public void EnhanceStat(string stat, float amount, int duration)
     {
@@ -58,7 +58,10 @@ public class StatEnhancement : MonoBehaviour {
 
     IEnumerator EnhanceEnd(string stat, float amount, int duration, int startTurn)
     {
-        while (battler.turn - startTurn < duration);
+        while (battler.turn - startTurn < duration)
+        {
+            yield return null;
+        }
         switch (stat)
         {
             case "hpMax":
@@ -92,7 +95,6 @@ public class StatEnhancement : MonoBehaviour {
                 thunderRes -= amount;
                 break;
         }
-        yield return null;
     }
 
     public void Reinit()

@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class Thunder : Action{
 
-    public Thunder()
+    public override void Init()
     {
         name = "Thunder";
         desc = "Cast a magical thunder strike to the enemy";
         battleDesc = caster.battlerName + " casts a thunder strike ";
-        priority = 1;
-        mpCost = 5;
-        hpCost = 0;
     }
 
     public override void CastAction()
