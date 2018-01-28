@@ -10,7 +10,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private int MAIN_MENU_INDEX = 0;
     [SerializeField] private string FLOOR_TAG = "Floor";
     [SerializeField] private string FLOOR_START_TAG = "FloorStart";
+    [SerializeField] private string FLOOR_TRAP_TAG = "FloorTrap";
     [SerializeField] private float PLAYER_Y_OFFSET = 0.8f;
+    [SerializeField] private float TRAPP_Y_OFFSET = -0.2f;
     [SerializeField] private GameObject floorPrefab;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private float SECURITY_FLOOR_DISTANCE_PERCENTAGE = 0.2f;
@@ -95,11 +97,18 @@ public class CharacterController : MonoBehaviour
     //check if tile contains a special tile
     private void CheckTileEvent(GameObject tile)
     {
-        if (tile.transform.childCount > 0)
+        if (tile.transform.childCount > 0 || tile.transform.CompareTag(FLOOR_TRAP_TAG))
         {
             //TODO: handle trap
             Debug.Log("It's a trap !");
-            EventTile childTile = tile.transform.GetChild(0).GetComponent<EventTile>();
+            EventTile childTile;
+            if (tile.transform.childCount > 0)
+                childTile = tile.transform.GetChild(0).GetComponent<EventTile>();
+            else
+                childTile = tile.transform.GetComponent<EventTile>();
+
+            childTile.transform.position = new Vector3(childTile.transform.position.x, TRAPP_Y_OFFSET,
+                childTile.transform.position.z);
             if (null != childTile)
             {
                 TileNatureEnum childTileNature = childTile.TileNatureEnum;
@@ -150,7 +159,8 @@ public class CharacterController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 100))
         {
             Debug.DrawLine(ray.origin, hit.point);
-            if (hit.transform.CompareTag(FLOOR_TAG) && IsMovementAllowed(hit.transform))
+            if ((hit.transform.CompareTag(FLOOR_TAG) || hit.transform.CompareTag(FLOOR_TRAP_TAG)) &&
+                IsMovementAllowed(hit.transform))
             {
                 hit.transform.GetComponent<MeshRenderer>().materials[0].color = Color.red;
                 coloredTiles.Add(hit.transform.gameObject);
