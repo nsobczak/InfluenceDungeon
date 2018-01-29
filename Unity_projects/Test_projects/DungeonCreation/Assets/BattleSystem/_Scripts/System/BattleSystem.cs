@@ -11,8 +11,6 @@ public class BattleSystem : MonoBehaviour {
     public GameObject description;
     public GameObject selectionPanel;
     public GameObject magicPanel;
-    
-    [SerializeField] private string EXPlORATION_SCENE = "DungeonExploration";
 
     [HideInInspector] public Text descriptionText;
 
@@ -72,14 +70,13 @@ public class BattleSystem : MonoBehaviour {
         {
             descriptionText.text = "Victory";
             Destroy(enemy.gameObject);
-            SceneManager.LoadScene(EXPlORATION_SCENE);
         }
         else
         {
             descriptionText.text = "Game Over";
             Destroy(player.gameObject);
-            SceneManager.LoadScene(EXPlORATION_SCENE);
         }
+        SceneManager.LoadScene("DungeonCreation");
     }
 
     IEnumerator PlayerTurn()

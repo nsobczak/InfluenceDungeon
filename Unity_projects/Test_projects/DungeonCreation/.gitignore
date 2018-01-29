@@ -31,6 +31,7 @@ sysinfo.txt
 /*.userprefs
 /*.csproj
 /*.pidb
+*.pidb.meta
 /*.suo
 /*.sln*
 /*.user
@@ -55,4 +56,3 @@ ehthumbs.db
 [Dd]esktop.ini
 Corridor/Library/ShaderCache/
 Corridor/Library/metadata/
-/TestProject/

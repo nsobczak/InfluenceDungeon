@@ -11,7 +11,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private string FLOOR_TAG = "Floor";
     [SerializeField] private string FLOOR_START_TAG = "FloorStart";
     [SerializeField] private string FLOOR_TRAP_TAG = "FloorTrap";
-    [SerializeField] private string BATTLE_SCENE_NAME = "BattleScene";
     [SerializeField] private float PLAYER_Y_OFFSET = 0.8f;
     [SerializeField] private float TRAP_Y_OFFSET = -0.2f;
     [SerializeField] private GameObject floorPrefab;
