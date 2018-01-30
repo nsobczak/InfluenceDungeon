@@ -4,64 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class BattleSystem : MonoBehaviour {
+public class BattleSystem : MonoBehaviour
+{
+    #region Attributes
 
     public EnemyBattlerController enemy;
     public PlayerBattlerController player;
     public GameObject description;
     public GameObject selectionPanel;
     public GameObject magicPanel;
-    
+
     [SerializeField] private string EXPlORATION_SCENE = "DungeonExploration";
 
     [HideInInspector] public Text descriptionText;
 
     private bool wait;
 
-	// Use this for initialization
-	void Start () {
-        descriptionText = description.GetComponent<Text>();
-        selectionPanel.SetActive(false);
-        if (player.init >= enemy.init)
-        {
-            player.activeTurn = true;
-            enemy.activeTurn = false;
-        }
-        else
-        {
-            player.activeTurn = false;
-            enemy.activeTurn = true;
-        }
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        if (!wait)
-        {
-            if (player.activeTurn)
-            {
-                selectionPanel.SetActive(true);
-                if (player.selectedAction != null)
-                {
-                    wait = true;
-                    StartCoroutine(PlayerTurn());
-                }
-            }
-            else if (enemy.activeTurn)
-            {
-                wait = true;
-                StartCoroutine(EnemyTurn());
-            }
-            if (player.hp <= 0)
-            {
-                endBattle(false);
-            }
-            else if (enemy.hp <= 0)
-            {
-                endBattle(true);
-            }
-        }
-	}
+    #endregion
+
+    //___________________________________________________
 
     private void endBattle(bool victory)
     {
@@ -103,4 +64,51 @@ public class BattleSystem : MonoBehaviour {
         wait = false;
     }
 
+    //___________________________________________________
+
+    void Start()
+    {
+        descriptionText = description.GetComponent<Text>();
+        selectionPanel.SetActive(false);
+        if (player.init >= enemy.init)
+        {
+            player.activeTurn = true;
+            enemy.activeTurn = false;
+        }
+        else
+        {
+            player.activeTurn = false;
+            enemy.activeTurn = true;
+        }
+    }
+
+    void Update()
+    {
+        if (!wait)
+        {
+            if (player.activeTurn)
+            {
+                selectionPanel.SetActive(true);
+                if (player.selectedAction != null)
+                {
+                    wait = true;
+                    StartCoroutine(PlayerTurn());
+                }
+            }
+            else if (enemy.activeTurn)
+            {
+                wait = true;
+                StartCoroutine(EnemyTurn());
+            }
+
+            if (player.hp <= 0)
+            {
+                endBattle(false);
+            }
+            else if (enemy.hp <= 0)
+            {
+                endBattle(true);
+            }
+        }
+    }
 }

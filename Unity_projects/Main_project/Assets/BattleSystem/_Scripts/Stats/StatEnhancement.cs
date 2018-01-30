@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatEnhancement : MonoBehaviour {
+public class StatEnhancement : MonoBehaviour
+{
+    #region Attributes
 
     public BattlerController battler;
 
     public int hpMax, mpMax, atk, mag, def, res, init;
     public float fireRes, iceRes, thunderRes;
+
+    #endregion
     
+    //___________________________________________________
+
+    #region Methods
+
     public void EnhanceStat(string stat, float amount, int duration)
     {
         switch (stat)
@@ -62,6 +70,7 @@ public class StatEnhancement : MonoBehaviour {
         {
             yield return null;
         }
+
         switch (stat)
         {
             case "hpMax":
@@ -102,4 +111,6 @@ public class StatEnhancement : MonoBehaviour {
         StopAllCoroutines();
         hpMax = mpMax = atk = mag = def = res = init = 0;
     }
+
+    #endregion
 }

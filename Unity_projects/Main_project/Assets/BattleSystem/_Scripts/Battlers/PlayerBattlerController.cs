@@ -3,19 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerBattlerController : BattlerController {
+public class PlayerBattlerController : BattlerController
+{
+    #region Attributes
 
     public Action attack, guard, fire, ice, thunder, heal, concentration;
-    public GameObject hpTextObject, mpTextObject, hpSliderObject, mpSliderObject, atkTextObject, magTextObject, defTextObject, resTextObject;
+
+    public GameObject hpTextObject,
+        mpTextObject,
+        hpSliderObject,
+        mpSliderObject,
+        atkTextObject,
+        magTextObject,
+        defTextObject,
+        resTextObject;
 
     [HideInInspector] public Action selectedAction;
 
     private Text hpText, mpText, atkText, magText, defText, resText;
     private Slider hpSlider, mpSlider;
 
-    // Use this for initialization
-    void Start () {
+    #endregion
 
+    //___________________________________________________
+    
+    void Start()
+    {
         hpText = hpTextObject.GetComponent<Text>();
         mpText = mpTextObject.GetComponent<Text>();
         atkText = atkTextObject.GetComponent<Text>();
@@ -55,29 +68,30 @@ public class PlayerBattlerController : BattlerController {
         concentration.Init();
 
         selectedAction = null;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
+
+    void Update()
+    {
         hpSlider.maxValue = hpMax + buffs.hpMax;
         hpSlider.value = hp;
         mpSlider.maxValue = mpMax + buffs.mpMax;
         mpSlider.value = mp;
-        hpText.text = hp + "/" + (int)(hpMax+buffs.hpMax);
-        mpText.text = mp + "/" + (int)(mpMax + buffs.mpMax);
-        atkText.text = "ATK "+ (int)(atk + buffs.atk);
-        magText.text = "MAG "+ (int)(mag + buffs.mag);
-        defText.text = "DEF "+ (int)(def + buffs.def);
-        resText.text = "RES "+ (int)(res + buffs.res);
+        hpText.text = hp + "/" + (int) (hpMax + buffs.hpMax);
+        mpText.text = mp + "/" + (int) (mpMax + buffs.mpMax);
+        atkText.text = "ATK " + (int) (atk + buffs.atk);
+        magText.text = "MAG " + (int) (mag + buffs.mag);
+        defText.text = "DEF " + (int) (def + buffs.def);
+        resText.text = "RES " + (int) (res + buffs.res);
     }
-	
-	//______________________________________
-	// buttons functions
 
-	public void SelectAttackAction()
-	{
-		this.selectedAction = attack;
-	}
+    //______________________________________
+
+    #region buttons functions
+
+    public void SelectAttackAction()
+    {
+        this.selectedAction = attack;
+    }
 
     public void SelectGuardAction()
     {
@@ -109,7 +123,10 @@ public class PlayerBattlerController : BattlerController {
         this.selectedAction = concentration;
     }
 
-    //over buttons actions
+    #endregion
+
+
+    #region over buttons actions
 
     public void OverAttackAction()
     {
@@ -155,4 +172,6 @@ public class PlayerBattlerController : BattlerController {
     {
         battleSystem.descriptionText.text = "Choose a magic spell to cast";
     }
+
+    #endregion
 }
