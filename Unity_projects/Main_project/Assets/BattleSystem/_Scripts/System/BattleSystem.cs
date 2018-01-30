@@ -33,13 +33,15 @@ public class BattleSystem : MonoBehaviour
         {
             descriptionText.text = "Victory";
             Destroy(enemy.gameObject);
+//            TODO: replace following line by just destroy battle scene and
+// return to the same EXPlORATION_SCENE (without creating a new player)
             SceneManager.LoadScene(EXPlORATION_SCENE);
         }
         else
         {
             descriptionText.text = "Game Over";
             Destroy(player.gameObject);
-            SceneManager.LoadScene(EXPlORATION_SCENE);
+            SceneManager.LoadScene(EXPlORATION_SCENE); //restart level
         }
     }
 
@@ -69,6 +71,7 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         descriptionText = description.GetComponent<Text>();
+
         selectionPanel.SetActive(false);
         if (player.init >= enemy.init)
         {

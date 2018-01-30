@@ -135,7 +135,11 @@ public class CharacterController : MonoBehaviour
                 else if (childTileNature == TileNatureEnum.Monster)
                 {
                     Debug.Log("Trap is: " + TileNatureEnum.Monster);
-                    SceneManager.LoadScene("BattleScene");
+                    SceneManager.LoadScene(BATTLE_SCENE_NAME, LoadSceneMode.Additive);
+//                    Camera.main.enabled = false;
+                    //TODO: manage scenes correctly:
+                    //The way scene loading work and always have worked in Unity is that it complete in the next frame (Async version maybe even later), so you cannot immediately change the active scene to the new scene it simply not loaded at that point.
+//                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(BATTLE_SCENE_NAME)); 
                 }
                 else if (childTileNature == TileNatureEnum.StartPoint)
                 {

@@ -7,6 +7,9 @@ public class PlayerBattlerController : BattlerController
 {
     #region Attributes
 
+    public Player player;
+    public string PLAYER_TAG = "Player";
+
     public Action attack, guard, fire, ice, thunder, heal, concentration;
 
     public GameObject hpTextObject,
@@ -26,19 +29,10 @@ public class PlayerBattlerController : BattlerController
     #endregion
 
     //___________________________________________________
-    
-    void Start()
+
+
+    private void InitActions()
     {
-        hpText = hpTextObject.GetComponent<Text>();
-        mpText = mpTextObject.GetComponent<Text>();
-        atkText = atkTextObject.GetComponent<Text>();
-        magText = magTextObject.GetComponent<Text>();
-        defText = defTextObject.GetComponent<Text>();
-        resText = resTextObject.GetComponent<Text>();
-
-        hpSlider = hpSliderObject.GetComponent<Slider>();
-        mpSlider = mpSliderObject.GetComponent<Slider>();
-
         attack.target = battleSystem.enemy;
         attack.caster = battleSystem.player;
         attack.Init();
@@ -66,6 +60,27 @@ public class PlayerBattlerController : BattlerController
         concentration.target = battleSystem.enemy;
         concentration.caster = battleSystem.player;
         concentration.Init();
+    }
+
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag(PLAYER_TAG).GetComponent<Player>();
+        hp = player.Hp;
+        mp = player.Mp;
+        //TODO: add name
+
+        hpText = hpTextObject.GetComponent<Text>();
+        mpText = mpTextObject.GetComponent<Text>();
+        atkText = atkTextObject.GetComponent<Text>();
+        magText = magTextObject.GetComponent<Text>();
+        defText = defTextObject.GetComponent<Text>();
+        resText = resTextObject.GetComponent<Text>();
+
+        hpSlider = hpSliderObject.GetComponent<Slider>();
+        mpSlider = mpSliderObject.GetComponent<Slider>();
+
+        InitActions();
 
         selectedAction = null;
     }
