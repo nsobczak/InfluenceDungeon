@@ -448,7 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac36bf983358a2b42808713665aee88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battlerName: Pash
+  battlerName: Player
   hpMax: 100
   mpMax: 50
   hp: 100
@@ -722,6 +722,8 @@ MonoBehaviour:
   description: {fileID: 423424646}
   selectionPanel: {fileID: 795147366}
   magicPanel: {fileID: 557515137}
+  PLAYER_TAG: Player
+  CHARACTER_CONTROLLER_TAG: CharacterController
   EXPlORATION_SCENE: DungeonExploration
   descriptionText: {fileID: 0}
 --- !u!4 &399051728

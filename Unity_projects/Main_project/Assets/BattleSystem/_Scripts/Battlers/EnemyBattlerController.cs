@@ -17,6 +17,8 @@ public class EnemyBattlerController : BattlerController
     
     void Start()
     {
+        //TODO: set monster's characteristics
+        
         priorityRange = 0;
         priorityActions = new List<Action>();
         foreach (Action action in actions)

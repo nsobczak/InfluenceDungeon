@@ -113,14 +113,11 @@ public class BattleSystem : MonoBehaviour
                 StartCoroutine(EnemyTurn());
             }
 
+            //end battle
             if (player.hp <= 0)
-            {
                 endBattle(false);
-            }
             else if (enemy.hp <= 0)
-            {
                 endBattle(true);
-            }
         }
     }
 }

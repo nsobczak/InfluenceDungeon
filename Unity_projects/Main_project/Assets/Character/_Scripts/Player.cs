@@ -8,9 +8,10 @@ public class Player : MonoBehaviour
 
     [SerializeField] private int MAX_HP = 100;
     [SerializeField] private int MAX_MP = 50;
-
-    private int HP;
-    private int MP;
+    
+    private string name;
+    private int hp;
+    private int mp;
 
     #endregion
 
@@ -20,20 +21,27 @@ public class Player : MonoBehaviour
 
     public Player()
     {
-        this.HP = MAX_HP;
-        this.MP = MAX_MP;
+        this.hp = MAX_HP;
+        this.mp = MAX_MP;
+        this.name = "Player";
     }
 
     public int Hp
     {
-        get { return HP; }
-        set { HP = value; }
+        get { return hp; }
+        set { hp = value; }
     }
 
     public int Mp
     {
-        get { return MP; }
-        set { MP = value; }
+        get { return mp; }
+        set { mp = value; }
+    }
+
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
     }
 
     #endregion

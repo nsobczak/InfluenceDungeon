@@ -68,7 +68,7 @@ public class PlayerBattlerController : BattlerController
         player = GameObject.FindGameObjectWithTag(PLAYER_TAG).GetComponent<Player>();
         hp = player.Hp;
         mp = player.Mp;
-        //TODO: add name
+        name = player.Name;
 
         hpText = hpTextObject.GetComponent<Text>();
         mpText = mpTextObject.GetComponent<Text>();
