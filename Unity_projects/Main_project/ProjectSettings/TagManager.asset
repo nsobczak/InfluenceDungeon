@@ -9,6 +9,8 @@ TagManager:
   - FloorTrap
   - CharacterController
   - MainMenu
+  - BattleSystem
+  - MonsterController
   layers:
   - Default
   - TransparentFX

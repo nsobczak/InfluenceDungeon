@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     private static int instanceCount = 0;
 
     [SerializeField] private GameObject characterControllerPrefab;
+    [SerializeField] private GameObject monsterControllerPrefab;
 
     #endregion
 
@@ -52,6 +53,11 @@ public class GameController : MonoBehaviour
         if (CharacterController.characterControllerCount < CharacterController.maxCharacterControllerCount + 1)
             GameObject.Instantiate(characterControllerPrefab, transform);
         else
-            Debug.Log("GameControllerInstance already exists");
+            Debug.Log("GameController instance already exists");
+        
+        if (MonsterController.instanceCount < MonsterController.maxInstanceCount + 1)
+            GameObject.Instantiate(monsterControllerPrefab, transform);
+        else
+            Debug.Log("MonsterController instance already exists");
     }
 }

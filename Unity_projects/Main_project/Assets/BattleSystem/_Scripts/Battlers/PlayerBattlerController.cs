@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//TODO: prevent player from casting spell when mp < spell mp cost
 public class PlayerBattlerController : BattlerController
 {
     #region Attributes

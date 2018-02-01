@@ -54,6 +54,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterControllerPrefab: {fileID: 1133556926762064, guid: 6a7c3882de7794d4fba8b182e4a2680a,
     type: 2}
+  monsterControllerPrefab: {fileID: 1697940492066880, guid: ea8b912b67890406092f14ab926faaa2,
+    type: 2}
 --- !u!114 &114915177166937324
 MonoBehaviour:
   m_ObjectHideFlags: 1

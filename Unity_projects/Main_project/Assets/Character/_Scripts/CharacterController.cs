@@ -31,6 +31,9 @@ public class CharacterController : MonoBehaviour
     private Player player;
     private Vector3 playerPosition;
 
+    public MonsterTypeEnum lastMonsterType;
+    public int lastMonsterIndex;
+
     #endregion
 
 
@@ -119,7 +122,6 @@ public class CharacterController : MonoBehaviour
     {
         if (tile.transform.childCount > 0 || tile.transform.CompareTag(FLOOR_TRAP_TAG))
         {
-            //TODO: handle trap
             Debug.Log("It's a trap !");
             GameObject trapTile;
             if (tile.transform.childCount > 0)
@@ -154,7 +156,16 @@ public class CharacterController : MonoBehaviour
                 else if (childTileNature == TileNatureEnum.Monster)
                 {
                     Debug.Log("Trap is: " + TileNatureEnum.Monster);
-                    SceneManager.LoadScene(BATTLE_SCENE_NAME);
+                    //TODO: select matching monster
+                    TileMonster tileMonster = trapTile.GetComponent<TileMonster>();
+                    if (null != tileMonster)
+                    {
+                        lastMonsterType = tileMonster.MonsterType;
+                        lastMonsterIndex = tileMonster.MonsterIndex;
+                        SceneManager.LoadScene(BATTLE_SCENE_NAME);
+                    }
+                    else
+                        Debug.LogError("Monster tile not found");
                 }
                 else if (childTileNature == TileNatureEnum.StartPoint)
                 {

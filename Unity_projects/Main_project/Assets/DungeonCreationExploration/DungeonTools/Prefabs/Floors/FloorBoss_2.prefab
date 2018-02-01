@@ -9,48 +9,49 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1389745726050098}
+  m_RootGameObject: {fileID: 1587157855279252}
   m_IsPrefabParent: 1
---- !u!1 &1389745726050098
+--- !u!1 &1587157855279252
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4501817363806000}
-  - component: {fileID: 33961969745282498}
-  - component: {fileID: 23811937588039830}
-  - component: {fileID: 114177962961872496}
-  - component: {fileID: 54768850068926458}
-  - component: {fileID: 65490458108411888}
-  - component: {fileID: 114197703912124818}
+  - component: {fileID: 4618424929408404}
+  - component: {fileID: 33172322499950156}
+  - component: {fileID: 23291903500249682}
+  - component: {fileID: 114021985485416050}
+  - component: {fileID: 54378142800686026}
+  - component: {fileID: 65564518319574924}
+  - component: {fileID: 114129208534482612}
+  - component: {fileID: 114265007642673932}
   m_Layer: 0
-  m_Name: FloorMonster
+  m_Name: FloorBoss_2
   m_TagString: FloorTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4501817363806000
+--- !u!4 &4618424929408404
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1389745726050098}
+  m_GameObject: {fileID: 1587157855279252}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!23 &23811937588039830
+--- !u!23 &23291903500249682
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1389745726050098}
+  m_GameObject: {fileID: 1587157855279252}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -79,19 +80,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33961969745282498
+--- !u!33 &33172322499950156
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1389745726050098}
+  m_GameObject: {fileID: 1587157855279252}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54768850068926458
+--- !u!54 &54378142800686026
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1389745726050098}
+  m_GameObject: {fileID: 1587157855279252}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -101,39 +102,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65490458108411888
+--- !u!65 &65564518319574924
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1389745726050098}
+  m_GameObject: {fileID: 1587157855279252}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000002, z: 6.123235e-17}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114177962961872496
+--- !u!114 &114021985485416050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1389745726050098}
+  m_GameObject: {fileID: 1587157855279252}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ed141c8580d4a24fb1c216e6acd90d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: -1
---- !u!114 &114197703912124818
+--- !u!114 &114129208534482612
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1389745726050098}
+  m_GameObject: {fileID: 1587157855279252}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f10892e6dc2b432988cbfbde631290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileNatureIndex: 4
+--- !u!114 &114265007642673932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1587157855279252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4ccee5f09ee4e5786a607e93f54eaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterType: 1
+  monsterIndex: 2

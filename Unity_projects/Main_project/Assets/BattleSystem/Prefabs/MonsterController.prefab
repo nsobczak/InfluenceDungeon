@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1697940492066880}
+  m_IsPrefabParent: 1
+--- !u!1 &1697940492066880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4994121734722420}
+  - component: {fileID: 114128996125257164}
+  m_Layer: 0
+  m_Name: MonsterController
+  m_TagString: MonsterController
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4994121734722420
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697940492066880}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114128996125257164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1697940492066880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0268a266da347ccb1e006471a85958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CHARACTER_CONTROLLER_TAG: CharacterController
+  BATTLE_SYSTEM_TAG: BattleSystem
+  monsterList:
+  - {fileID: 1201893511559468, guid: a0271230157db4d1d8d13baffa238bd0, type: 2}
+  - {fileID: 1951912737240190, guid: f616b93f3b1da4291976b280822aa567, type: 2}
+  - {fileID: 1638895125010822, guid: 1d5f7dd88ace248c5a5111a704e8371f, type: 2}
+  - {fileID: 1149163522430424, guid: 8a81bb160f7ba48959b36cd28c5bc4c1, type: 2}
+  bossList:
+  - {fileID: 1378997989745654, guid: c4a6f02a5717645659ba79a085afb109, type: 2}
+  - {fileID: 1327870458260094, guid: e5a77568f7cc2422fb90bbbc0b9268ca, type: 2}
+  - {fileID: 1899098550420560, guid: 44be5551262744d9b8523b6cb8e5e775, type: 2}
+  - {fileID: 1880362227001560, guid: 79da742af5b1d4a7d94773b32c09e69b, type: 2}

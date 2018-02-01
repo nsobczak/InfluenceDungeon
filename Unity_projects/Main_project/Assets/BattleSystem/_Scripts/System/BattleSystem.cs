@@ -8,7 +8,7 @@ public class BattleSystem : MonoBehaviour
 {
     #region Attributes
 
-    public EnemyBattlerController enemy;
+    [HideInInspector] public EnemyBattlerController enemy;
     public PlayerBattlerController player;
     public GameObject description;
     public GameObject selectionPanel;
@@ -16,10 +16,12 @@ public class BattleSystem : MonoBehaviour
 
     [SerializeField] private string PLAYER_TAG = "Player";
     [SerializeField] private string CHARACTER_CONTROLLER_TAG = "CharacterController";
+    [SerializeField] private string MONSTER_CONTROLLER_TAG = "MonsterController";
     [SerializeField] private string EXPlORATION_SCENE = "DungeonExploration";
 
     [HideInInspector] public Text descriptionText;
 
+    private GameObject monsterController;
     private bool wait;
 
     #endregion
@@ -79,6 +81,11 @@ public class BattleSystem : MonoBehaviour
 
     void Start()
     {
+        monsterController = GameObject.FindGameObjectWithTag(MONSTER_CONTROLLER_TAG);
+        GameObject enemyGameObject = monsterController.GetComponent<MonsterController>().InitBattle();
+        enemy = enemyGameObject.GetComponent<EnemyBattlerController>();
+        enemy.battleSystem = this.GetComponent<BattleSystem>();
+            
         descriptionText = description.GetComponent<Text>();
 
         selectionPanel.SetActive(false);
