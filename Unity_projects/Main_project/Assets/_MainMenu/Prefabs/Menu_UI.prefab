@@ -1867,10 +1867,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Create your dungeon.
+  m_Text: 'Escape dungeon by finding the exit.
 
-
-    Defeat your opponent''s dungeon.'
+    Beware traps and monsters !'
 --- !u!114 &114017355169053402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5188,7 +5187,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Add controls here
+  m_Text: Select actions and move with left mouse button
 --- !u!114 &114969789140488510
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7442,7 +7441,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1627290825395384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -9.548599, z: 0}
+  m_LocalPosition: {x: 0, y: 22.775352, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224270433414486130}
@@ -7450,8 +7449,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -9.5486}
-  m_SizeDelta: {x: 0, y: 213.67}
+  m_AnchoredPosition: {x: 0, y: 22.775352}
+  m_SizeDelta: {x: 0, y: 149.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224763261527887006
 RectTransform:
@@ -7632,7 +7631,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1613641819347134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -181.34001, z: 0}
+  m_LocalPosition: {x: 0, y: -146.29001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224418242717463254}
@@ -7640,8 +7639,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -138.74}
-  m_SizeDelta: {x: 0, y: 277.47}
+  m_AnchoredPosition: {x: 0, y: -103.69}
+  m_SizeDelta: {x: 0, y: 207.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224890417966234010
 RectTransform:
