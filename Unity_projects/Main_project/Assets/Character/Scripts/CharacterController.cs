@@ -7,6 +7,11 @@ public class CharacterController : MonoBehaviour
 {
     #region Attributes
 
+    public bool mustBeReset = false;
+
+    public static int maxCharacterControllerCount = 1;
+    public static int characterControllerCount = 0;
+
     [SerializeField] private int MAIN_MENU_INDEX = 0;
     [SerializeField] private string FLOOR_TAG = "Floor";
     [SerializeField] private string FLOOR_START_TAG = "FloorStart";
@@ -24,6 +29,7 @@ public class CharacterController : MonoBehaviour
     private List<GameObject> coloredTiles;
     private float floorSize;
     private Player player;
+    private Vector3 playerPosition;
 
     #endregion
 
@@ -36,6 +42,12 @@ public class CharacterController : MonoBehaviour
 
     private CharacterController()
     {
+        ++characterControllerCount;
+    }
+
+    ~CharacterController()
+    {
+        --characterControllerCount;
     }
 
     public static CharacterController GetGameControllerInstance
@@ -51,7 +63,7 @@ public class CharacterController : MonoBehaviour
     #endregion
 
 
-    #region Functions
+    #region Methods
 
     private bool IsMovementAllowed(Transform target)
     {
@@ -64,6 +76,9 @@ public class CharacterController : MonoBehaviour
 
     private void Reset()
     {
+        Debug.Log("this.transform.name: " + this.transform.name);
+        if (null == startPointTile)
+            startPointTile = GameObject.FindWithTag(FLOOR_START_TAG);
         this.transform.position = new Vector3(startPointTile.transform.position.x, startPointTile.transform.position.y,
             startPointTile.transform.position.z); //on start point
         player = GameObject.Instantiate(playerPrefab, transform).GetComponent<Player>();
@@ -91,11 +106,15 @@ public class CharacterController : MonoBehaviour
         coloredTiles = new List<GameObject>();
 
         startPointTile = GameObject.FindWithTag(FLOOR_START_TAG);
-        Reset();
+        mustBeReset = true;
     }
 
 
-    //check if tile contains a special tile
+    /**
+     * \fn private void CheckTileEvent(GameObject tile)
+     * \param GameObject tile
+     * \brief check if tile contains a special tile
+     */
     private void CheckTileEvent(GameObject tile)
     {
         if (tile.transform.childCount > 0 || tile.transform.CompareTag(FLOOR_TRAP_TAG))
@@ -124,7 +143,7 @@ public class CharacterController : MonoBehaviour
                 else if (childTileNature == TileNatureEnum.Holes)
                 {
                     Debug.Log("Trap is: " + TileNatureEnum.Holes);
-                    GameObject.Destroy(player);
+                    GameObject.Destroy(player.gameObject);
                     Reset();
                 }
                 else if (childTileNature == TileNatureEnum.OtherTrap)
@@ -135,11 +154,7 @@ public class CharacterController : MonoBehaviour
                 else if (childTileNature == TileNatureEnum.Monster)
                 {
                     Debug.Log("Trap is: " + TileNatureEnum.Monster);
-                    SceneManager.LoadScene(BATTLE_SCENE_NAME, LoadSceneMode.Additive);
-//                    Camera.main.enabled = false;
-                    //TODO: manage scenes correctly:
-                    //The way scene loading work and always have worked in Unity is that it complete in the next frame (Async version maybe even later), so you cannot immediately change the active scene to the new scene it simply not loaded at that point.
-//                    SceneManager.SetActiveScene(SceneManager.GetSceneByName(BATTLE_SCENE_NAME)); 
+                    SceneManager.LoadScene(BATTLE_SCENE_NAME);
                 }
                 else if (childTileNature == TileNatureEnum.StartPoint)
                 {
@@ -156,7 +171,7 @@ public class CharacterController : MonoBehaviour
 
             if (player.Hp <= 0)
             {
-                GameObject.Destroy(player);
+                GameObject.Destroy(player.gameObject);
                 Reset();
             }
         }
@@ -164,6 +179,14 @@ public class CharacterController : MonoBehaviour
 
     private void Update()
     {
+        if (mustBeReset)
+        {
+            mustBeReset = false;
+            Reset();
+        }
+
+
+        // === handle movement on tiles ===
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
@@ -179,11 +202,14 @@ public class CharacterController : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
 //                    Debug.Log("hit object is: " + hit.transform.name);
-                    transform.position =
+                    playerPosition =
                         new Vector3(hit.transform.position.x, PLAYER_Y_OFFSET, hit.transform.position.z);
+                    transform.position = playerPosition;
 
-                    foreach (var tile in coloredTiles)
-                        tile.transform.GetComponent<MeshRenderer>().materials[0].color = Color.white;
+                    //TODO: see what doesn't work here
+//                    if (null != coloredTiles)
+//                        foreach (var tile in coloredTiles)
+//                            tile.transform.GetComponent<MeshRenderer>().materials[0].color = Color.white;
 
                     CheckTileEvent(hit.transform.gameObject);
                 }

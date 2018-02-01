@@ -14,6 +14,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject selectionPanel;
     public GameObject magicPanel;
 
+    [SerializeField] private string PLAYER_TAG = "Player";
+    [SerializeField] private string CHARACTER_CONTROLLER_TAG = "CharacterController";
     [SerializeField] private string EXPlORATION_SCENE = "DungeonExploration";
 
     [HideInInspector] public Text descriptionText;
@@ -33,15 +35,22 @@ public class BattleSystem : MonoBehaviour
         {
             descriptionText.text = "Victory";
             Destroy(enemy.gameObject);
-//            TODO: replace following line by just destroy battle scene and
-// return to the same EXPlORATION_SCENE (without creating a new player)
+
+            //update payer stats
+            Player playerScript = GameObject.FindGameObjectWithTag(PLAYER_TAG).GetComponent<Player>();
+            playerScript.Hp = player.hp;
+            playerScript.Mp = player.mp;
             SceneManager.LoadScene(EXPlORATION_SCENE);
         }
         else
         {
             descriptionText.text = "Game Over";
             Destroy(player.gameObject);
-            SceneManager.LoadScene(EXPlORATION_SCENE); //restart level
+
+            CharacterController characterController =
+                GameObject.FindGameObjectWithTag(CHARACTER_CONTROLLER_TAG).GetComponent<CharacterController>();
+            characterController.mustBeReset = true; //restart level
+            SceneManager.LoadScene(EXPlORATION_SCENE);
         }
     }
 

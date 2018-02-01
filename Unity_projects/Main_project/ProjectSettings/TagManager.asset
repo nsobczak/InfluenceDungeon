@@ -7,6 +7,8 @@ TagManager:
   - Floor
   - FloorStart
   - FloorTrap
+  - CharacterController
+  - MainMenu
   layers:
   - Default
   - TransparentFX
