@@ -201,15 +201,16 @@ public class CharacterController : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-//                    Debug.Log("hit object is: " + hit.transform.name);
                     playerPosition =
                         new Vector3(hit.transform.position.x, PLAYER_Y_OFFSET, hit.transform.position.z);
                     transform.position = playerPosition;
 
                     //TODO: see what doesn't work here
-//                    if (null != coloredTiles)
-//                        foreach (var tile in coloredTiles)
-//                            tile.transform.GetComponent<MeshRenderer>().materials[0].color = Color.white;
+                    foreach (GameObject tile in coloredTiles)
+                    {
+                        if (null != tile)
+                            tile.transform.GetComponent<MeshRenderer>().materials[0].color = Color.white;
+                    }
 
                     CheckTileEvent(hit.transform.gameObject);
                 }
