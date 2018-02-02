@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,7 +13,8 @@ public class CharacterController : MonoBehaviour
     public static int maxCharacterControllerCount = 1;
     public static int characterControllerCount = 0;
 
-    [SerializeField] private int MAIN_MENU_INDEX = 0;
+    [SerializeField] private string MAIN_MENU_SCENE_NAME = "MenuScene";
+    [SerializeField] private string MAIN_MENU_TAG = "MainMenu";
     [SerializeField] private string FLOOR_TAG = "Floor";
     [SerializeField] private string FLOOR_START_TAG = "FloorStart";
     [SerializeField] private string FLOOR_TRAP_TAG = "FloorTrap";
@@ -89,11 +91,15 @@ public class CharacterController : MonoBehaviour
     }
 
 
-    private void GameOver()
+    private IEnumerator GameOver()
     {
         Debug.Log("game over");
         GameObject.Destroy(player);
-        SceneManager.LoadScene(0);
+        GameObject.Destroy(GameObject.FindGameObjectWithTag(MAIN_MENU_TAG));
+        //TODO: see if wait is useful, if not => remove coroutine type
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(MAIN_MENU_SCENE_NAME);
+        GameObject.Destroy(this.transform.parent.gameObject);
     }
 
     #endregion
@@ -156,7 +162,6 @@ public class CharacterController : MonoBehaviour
                 else if (childTileNature == TileNatureEnum.Monster)
                 {
                     Debug.Log("Trap is: " + TileNatureEnum.Monster);
-                    //TODO: select matching monster
                     TileMonster tileMonster = trapTile.GetComponent<TileMonster>();
                     if (null != tileMonster)
                     {
@@ -174,7 +179,7 @@ public class CharacterController : MonoBehaviour
                 else if (childTileNature == TileNatureEnum.ExitPoint)
                 {
                     Debug.Log("Trap is: " + TileNatureEnum.ExitPoint);
-                    GameOver();
+                    StartCoroutine(GameOver());
                 }
                 else
                     Debug.Log("Trap is unknown !");
